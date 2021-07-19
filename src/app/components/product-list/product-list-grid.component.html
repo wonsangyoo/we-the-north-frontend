@@ -1,0 +1,54 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <h4>Selected Team: {{ currentCategoryName }}</h4>
+    <hr>
+    <div class="container-fluid">
+      <div class="row">
+
+        <!-- Loop over the collection of products -->
+        <div *ngFor="let product of products" class="col-md-3">
+
+          <div class="product-box">
+            <a routerLink="/products/{{ product.id }}">
+              <img src="{{ product.imageUrl }}" class="img-responsive">
+            </a>
+            <a routerLink="/products/{{ product.id }}">
+              <h1>{{ product.name }}</h1>
+            </a>
+            <div class="price">{{ product.unitPrice | currency: 'CAD' }}</div>
+            <a href="#" class="primary-btn">Add to Cart</a>
+          </div>
+          
+        </div>
+
+        <!-- if no product found -->
+        <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+          No Product Found.
+        </div>
+      </div>
+
+      <!-- begin footer -->
+      <div class="footer-pagination">
+        <div class="row">
+          <div class="col-md-6"></div>
+
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-9" style="padding-left: 30%">
+                <ngb-pagination [(page)]="thePageNumber"
+                                [pageSize]="thePageSize"
+                                [collectionSize]="theTotalElements"
+                                (pageChange)="listProducts()" 
+                                >
+
+                </ngb-pagination>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- end footer -->
+    </div>
+  </div>
+</div>
